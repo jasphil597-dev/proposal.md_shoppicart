@@ -30,17 +30,11 @@ To build a simple online grocery shopping platform where users can browse, add, 
 
   - I want to be able to view my shopping cart so that I can see all the items I’ve added to it before proceeding to checkout.
   - The user can view their cart with details like item name, quantity, price, and total cost.
+  - I want to be able to add items to my cart so that I can start shopping for groceries.
+  - The user can modify the quantity or remove individual items from their cart or delete the entire item on the cart.
   - The cart is associated with the user and persists between sessions using MongoDB.
 
-- As a user,
-  - I want to be able to add items to my cart so that I can start shopping for groceries.
-  - The user can add an item to their cart with fields like name, quantity, and price.
-  - The item is stored in the database with the user’s ID as a reference.
-- As a user,
-  - I want to be able to update the quantity or details of items in my cart to adjust my shopping list.
-  - The user can modify the quantity or remove individual items from their cart or delete the entire item on the cart.
-
-3. Authentication and Authorization
+#### Authentication and Authorization
 
 - As a user,
 
@@ -48,13 +42,27 @@ To build a simple online grocery shopping platform where users can browse, add, 
 
   - Access to the cart is restricted to authenticated users.
 
-4. Backend & Data Modeling
+---
 
-- As a developer,
-
-  - I want to define a user model and cart model to structure the data in MongoDB so that we can persist user information and their cart items efficiently.
+![image](./Screenshot%202024-11-25%20at%204.14.26 PM.png)
+![image](./Screenshot%202024-11-23%20at%209.59.26 PM.png)
+![image](./Screenshot%202024-11-23%20at%209.59.13 PM.png)
+![image](./Screenshot%202024-11-23%20at%209.58.50 PM.png)
+![image](./Screenshot%202024-11-25%20at%203.24.43 PM.png)
 
 ---
+
+| HTTP Method (Verb) | Path/Endpoint/URI | CRUD Operation                 | Route Name | Has Data Payload? | Purpose | Render/Redirect Action |
+| ------------------ | ----------------- | ------------------------------ | ---------- | ----------------- | ------- | ---------------------- |
+| GET                | /auth/sign-up     | welcome page                   | show       | no                |         |
+| POST               | /auth/sign-up     | Register a new user.signup     | create     | Yes               |         |                        |
+| GET                | /auth/sign-in     | Log in a user                  | show       | Yes               |         |                        |
+| POST               | /auth/sign-in     | Add items to cart              | show       |
+| GET                | /cart/:userId     | Get the current user's cart    | show       |                   |         |                        |
+| POST               | /cart/:userId     | Add an item to the user's cart | edit       | Yes               |         |                        |
+| PUT                | /cart/:itemId     | Update an item in the cart     | show       | Yes               |         |                        |
+| DELETE             | /cart/:itemId     | Remove an item from the cart   | Delete     | No                |         |                        |
+| GET                | /auth/sign-out    | Back to main page              | Show       | No                |
 
 #### API Endpoints
 
@@ -66,26 +74,7 @@ To build a simple online grocery shopping platform where users can browse, add, 
    - POST /cart: Add an item to the user's cart.
    - PUT /cart/:itemId: Update an item in the cart.
    - DELETE /cart/:itemId: Remove an item from the cart.
-
----
-
-![image](./Screenshot%202024-11-22%20at%204.55.21 PM.png)
-![image](./Screenshot%202024-11-23%20at%209.59.26 PM.png)
-![image](./Screenshot%202024-11-23%20at%209.59.13 PM.png)
-![image](./Screenshot%202024-11-23%20at%209.58.50 PM.png)
-
----
-
-#### Routing Table Example…
-
-| HTTP Method (Verb) | Path/Endpoint/URI | CRUD Operation                 | Route Name | Has Data Payload? | Purpose | Render/Redirect Action |
-| ------------------ | ----------------- | ------------------------------ | ---------- | ----------------- | ------- | ---------------------- |
-| POST/GET           | /auth/signup      | Register a new user.           | create     | Yes               |
-| POST/GET           | /auth/login       | Log in a user                  | show       | Yes               |         |                        |
-| GET                | /cart             | Get the current user's cart    | show       |                   |         |                        |
-| POST               | /cart             | Add an item to the user's cart | edit       | Yes               |         |                        |
-| PUT                | /cart/:itemId     | Update an item in the cart     | show       | Yes               |         |                        |
-| DELETE             | /cart/:itemId     | Remove an item from the cart   | Delete     | No                |         |                        |
+   - GET /auth/sign-out Back to main page
 
 ---
 
@@ -94,8 +83,22 @@ To build a simple online grocery shopping platform where users can browse, add, 
 | Day                |     | Task                                   |     | Blockers                                     |     | Notes Thoughts |
 | ------------------ | --- | -------------------------------------- | --- | -------------------------------------------- | --- | -------------- |
 | Monday             |     | Create and present proposal Deployment |     | Finalize the proposal and submit thru github |
-| Tuesday & Thursday |     | Create scaffolding                     |     |                                              |     |                |
-| Friday             |     | Add functionality                      |     |                                              |     |                |
-| Saturday - Sunday  |     | Create html, js, css files             |     |                                              |     |                |
-| Monday             |     | MVP / Finalize fuctionality            |     |                                              |     |                |
+| Tuesday & Thursday |     | Create scaffolding                     |     | backend development                          |     |                |
+| Friday             |     | Create html, js, css files             |     | frontend development                         |     |                |
+| Saturday - Sunday  |     | Add functionality                      |     | frontend and backend                         |     |                |
+| Monday             |     | MVP / Finalize fuctionality            |     | unit testing                                 |     |                |
 | Tuesday            |     | Presentation Day                       |     |                                              |     |                |
+
+---
+
+| HTTP Method (Verb) | Path/Endpoint/URI | CRUD Operation                 | Route Name | Has Data Payload? | Purpose | Render/Redirect Action |
+| ------------------ | ----------------- | ------------------------------ | ---------- | ----------------- | ------- | ---------------------- |
+| GET                | /auth/sign-up     | welcome page                   | show       | no                |         |
+| POST               | /auth/sign-up     | Register a new user.signup     | create     | Yes               |         |                        |
+| GET                | /auth/sign-in     | Log in a user                  | show       | Yes               |         |                        |
+| POST               | /auth/sign-in     | Add items to cart              | show       |
+| GET                | /cart/:userId     | Get the current user's cart    | show       |                   |         |                        |
+| POST               | /cart/:userId     | Add an item to the user's cart | edit       | Yes               |         |                        |
+| PUT                | /cart/:itemId     | Update an item in the cart     | show       | Yes               |         |                        |
+| DELETE             | /cart/:itemId     | Remove an item from the cart   | Delete     | No                |         |                        |
+| GET                | /auth/sign-out    | Back to main page              | Show       | No                |
